@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AxiSight</string>
+    <string name="sim">Simulate</string>
+    <string name="auto">Auto-Detect</string>
+    <string name="calibrate">Calibrate</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="internal">Internal</string>
+    <string name="usb">USB</string>
+    <string name="wifi">WiFi</string>
+    <string name="wifi_url_hint">rtsp://</string>
+    <string name="connect">Connect</string>
+    <string name="params_text_format">minA %d  maxA %d  circ≥%.2f  kStd %.2f  mm/px %s</string>
+    <string name="unset">unset</string>
+    <string name="default_known_mm">10</string>
+</resources>

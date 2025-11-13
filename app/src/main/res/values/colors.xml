@@ -1,0 +1,7 @@
+<resources>
+    <color name="axisight_bg">#0B2A3E</color>
+    <color name="axisight_ring">#5EC8F8</color>
+    <color name="axisight_orbit">#77B4D9</color>
+    <color name="axisight_white">#FFFFFF</color>
+    <color name="axisight_marker">#111111</color>
+</resources>

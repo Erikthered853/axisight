@@ -1,0 +1,29 @@
+AxiSight - Fixes Applied (per FIX_INSTRUCTIONS.md)
+
+1) Removed obsolete resource:
+   - app/src/main/res/layout/fragment_usb_camera.xml
+
+2) Confirmed and retained Gradle dependencies in app/build.gradle:
+   - CameraX 1.5.1
+   - com.serenegiant:libuvc:3.4.2
+   - androidx.media3:media3-exoplayer and -rtsp 1.8.0
+   - Material/AppCompat/Core KTX
+   - ViewBinding enabled
+   - packagingOptions pickFirst libc++_shared
+
+3) Manifest verified:
+   - uses-feature android.hardware.usb.host
+   - USB intent-filter (USB_DEVICE_ATTACHED)
+   - meta-data @xml/device_filter
+
+4) USB device filter:
+   - app/src/main/res/xml/device_filter.xml re-created with broad allow-any-device filter.
+
+5) MainActivity.kt:
+   - Uses USBMonitor/UVCCamera from libuvc.
+   - Handles camera source switcher (Internal/USB/Wi‑Fi).
+   - Analyzes frames and overlays detection UI.
+
+Notes:
+- The archive is cleaned of build intermediates. Open the project in Android Studio, let it sync, then Run.
+- If you see a sync error about AGP/Kotlin versions, update the Android Gradle Plugin to a recent stable in the top-level build.gradle and ensure the Gradle wrapper matches.

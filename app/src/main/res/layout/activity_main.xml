@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:implementationMode="performance" />
+
+    <TextureView
+        android:id="@+id/textureView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.etrsystems.axisight.OverlayView
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Top controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="#66000000">
+
+        <RadioGroup
+            android:id="@+id/rgCameraSource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbInternal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/internal"
+                android:textColor="@android:color/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/rbUsb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usb"
+                android:textColor="@android:color/white"/>
+
+            <RadioButton
+                android:id="@+id/rbWifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi"
+                android:textColor="@android:color/white"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/wifiGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/edWifiUrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/wifi_url_hint"
+                android:inputType="textUri"/>
+
+            <Button
+                android:id="@+id/btnWifiConnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/connect"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sim"
+                android:textColor="@android:color/white"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auto"
+                android:textColor="@android:color/white"
+                android:checked="true"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnCal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calibrate"
+                android.layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnExport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/export_csv" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom tuning panel -->
+    <LinearLayout
+        android:id="@+id/tuningPanel"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#66000000"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txtParams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="minA 200  maxA 8000  circ≥0.5  kStd 1.0  mm/px unset" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView android:text="minA" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <SeekBar
+                android:id="@+id/seekMinArea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="20000"
+                android.progress="200" />
+
+            <TextView android:text="maxA" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <SeekBar
+                android:id="@+id/seekMaxArea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="50000"
+                android:progress="8000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView android:text="circ" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <SeekBar
+                android:id="@+id/seekCirc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="50" />
+            <TextView android:text="kStd" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <SeekBar
+                android:id="@+id/seekKstd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="300"
+                android:progress="100" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView android:text="mm/px" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <EditText
+                android:id="@+id/edMmPerPx"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="e.g. 0.02" 
+                android:inputType="numberDecimal" />
+            <TextView android:text="known mm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
+            <EditText
+                android:id="@+id/edKnownMm"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:hint="10"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
