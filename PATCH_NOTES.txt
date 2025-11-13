@@ -1,29 +1,6 @@
-AxiSight - Fixes Applied (per FIX_INSTRUCTIONS.md)
-
-1) Removed obsolete resource:
-   - app/src/main/res/layout/fragment_usb_camera.xml
-
-2) Confirmed and retained Gradle dependencies in app/build.gradle:
-   - CameraX 1.5.1
-   - com.serenegiant:libuvc:3.4.2
-   - androidx.media3:media3-exoplayer and -rtsp 1.8.0
-   - Material/AppCompat/Core KTX
-   - ViewBinding enabled
-   - packagingOptions pickFirst libc++_shared
-
-3) Manifest verified:
-   - uses-feature android.hardware.usb.host
-   - USB intent-filter (USB_DEVICE_ATTACHED)
-   - meta-data @xml/device_filter
-
-4) USB device filter:
-   - app/src/main/res/xml/device_filter.xml re-created with broad allow-any-device filter.
-
-5) MainActivity.kt:
-   - Uses USBMonitor/UVCCamera from libuvc.
-   - Handles camera source switcher (Internal/USB/Wi‑Fi).
-   - Analyzes frames and overlays detection UI.
-
-Notes:
-- The archive is cleaned of build intermediates. Open the project in Android Studio, let it sync, then Run.
-- If you see a sync error about AGP/Kotlin versions, update the Android Gradle Plugin to a recent stable in the top-level build.gradle and ensure the Gradle wrapper matches.
+Removed obsolete layout: app/src/main/res/layout/fragment_usb_camera.xml
+Verified dependencies in app/build.gradle (CameraX 1.5.1, Serenegiant libuvc 3.4.2, Media3 1.8.0, Material 1.13.0).
+Verified packagingOptions pickFirst for libc++_shared.so.
+Verified AndroidManifest adds USB_DEVICE_ATTACHED intent-filter and @xml/device_filter meta-data; usb host present.
+Verified res/xml/device_filter.xml allows any USB device.
+Cleaned project of build outputs/.gradle for a tidy source archive.

@@ -1,9 +1,11 @@
-package com.etrsystems.axisight
-
 import android.graphics.Bitmap
 import androidx.camera.core.ImageProxy
 import kotlin.math.*
 import java.nio.ByteBuffer
+
+
+
+import com.etrsystems.axisight.DetectorConfig
 
 object BlobDetector {
     fun detectDarkDotCenter(image: ImageProxy, cfg: DetectorConfig): Pair<Float, Float>? {

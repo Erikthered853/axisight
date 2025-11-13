@@ -5,11 +5,11 @@
 This repository contains the AxiSight Android App. Based on the `AndroidManifest.xml` and `app/build.gradle` files, this app's primary function involves using a camera for alignment and measurement tasks.
 
 It supports three camera sources:
-1.  **Internal Camera:** Uses the device's built-in camera via Android CameraX.
-2.  **USB Camera:** Directly connects to a UVC-compatible USB camera using the `com.serenegiant:libuvc` library.
-3.  **Wi-Fi Camera:** Connects to a network video stream (e.g., RTSP) using ExoPlayer.
+1.  **Internal Camera:** Uses the device's built-in camera.
+2.  **USB Camera:** Directly connects to a USB camera using the `libausbc` library.
+3.  **Wi-Fi Camera:** Connects to a network video stream (e.g., RTSP).
 
-The application is written in Kotlin.
+The application is written in Kotlin and uses Android CameraX for the internal camera source.
 
 ## Building and Running
 
@@ -19,15 +19,15 @@ This is a standard Android Gradle project.
 
 To build the application from the command line, use the Gradle wrapper:
 
-'''bash
+```bash
 ./gradlew build
-'''
+```
 
 **Assemble a Debug APK:**
 
-'''bash
+```bash
 ./gradlew assembleDebug
-'''
+```
 
 The output APK can be found in `app/build/outputs/apk/debug/`.
 
@@ -35,9 +35,9 @@ The output APK can be found in `app/build/outputs/apk/debug/`.
 
 The application can be run directly from Android Studio or installed on a device/emulator using `adb`:
 
-'''bash
+```bash
 adb install app/build/outputs/apk/debug/app-debug.apk
-'''
+```
 
 ## Development Conventions
 

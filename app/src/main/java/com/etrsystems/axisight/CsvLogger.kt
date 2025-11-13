@@ -16,9 +16,7 @@ class CsvLogger(private val ctx: Context) {
         val sb = StringBuilder()
         sb.appendLine("index,x_px,y_px")
         sb.appendLine("# mm_per_px=${mmPerPx ?: Double.NaN}")
-        overlay.getPoints().forEachIndexed { index, p -> 
-            sb.appendLine("$index,${p.first},${p.second}") 
-        }
+        overlay.getPoints().forEach { p -> sb.appendLine("${p.first},${p.second}") }
         file.writeText(sb.toString())
         Toast.makeText(ctx, "Exported ${file.absolutePath}", Toast.LENGTH_LONG).show()
     }

@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/calibrate"
-                android.layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"/>
 
             <Button
                 android:id="@+id/btnExport"
@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="20000"
-                android.progress="200" />
+                android:progress="200" />
 
             <TextView android:text="maxA" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white"/>
             <SeekBar

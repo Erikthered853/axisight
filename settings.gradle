@@ -1,10 +1,9 @@
-// settings.gradle
-
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
+        maven { url = 'https://jitpack.io' }
     }
 }
 
@@ -13,9 +12,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // This is needed for the UVCCamera library you added earlier
-        maven { url 'https://jitpack.io' }
+        maven { url = 'https://jitpack.io' }
     }
 }
-rootProject.name = "axisight-3"
-include ':app'
+rootProject.name = "AxiSight"
+include(":app")
