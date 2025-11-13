@@ -3,7 +3,7 @@ package com.etrsystems.axisight
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.SurfaceTexture
-import android.hardware.usb.UsbDevice
+// import android.hardware.usb.UsbDevice
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.Surface
@@ -21,9 +21,9 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.rtsp.RtspMediaSource
 import com.etrsystems.axisight.databinding.ActivityMainBinding
-import com.serenegiant.usb.DeviceFilter
-import com.serenegiant.usb.USBMonitor
-import com.serenegiant.usb.UVCCamera
+// import com.serenegiant.usb.DeviceFilter
+// import com.serenegiant.usb.USBMonitor
+// import com.serenegiant.usb.UVCCamera
 import java.util.Locale
 import kotlin.math.cos
 import kotlin.math.hypot
@@ -38,10 +38,10 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
     private var cameraProvider: ProcessCameraProvider? = null
     private var imageAnalyzer: ImageAnalysis? = null
     private var exoPlayer: ExoPlayer? = null
-    private var usbMonitor: USBMonitor? = null
-    private var uvcCamera: UVCCamera? = null
+    // private var usbMonitor: USBMonitor? = null
+    // private var uvcCamera: UVCCamera? = null
 
-    private enum class CameraSource { INTERNAL, USB, WIFI }
+    private enum class CameraSource { INTERNAL, /* USB, */ WIFI }
 
     private var cameraSource = CameraSource.INTERNAL
 
@@ -77,9 +77,10 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
                     cameraSource = CameraSource.INTERNAL
                     b.wifiGroup.visibility = View.GONE
                     stopWifiCamera()
-                    stopUsbCamera()
+                    // stopUsbCamera()
                     startCamera()
                 }
+                /*
                 R.id.rbUsb -> {
                     cameraSource = CameraSource.USB
                     b.wifiGroup.visibility = View.GONE
@@ -87,11 +88,12 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
                     stopWifiCamera()
                     startUsbCamera()
                 }
+                */
                 R.id.rbWifi -> {
                     cameraSource = CameraSource.WIFI
                     b.wifiGroup.visibility = View.VISIBLE
                     stopCamera()
-                    stopUsbCamera()
+                    // stopUsbCamera()
                 }
             }
         }
@@ -108,7 +110,7 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
             if (simulate) {
                 stopCamera()
                 stopWifiCamera()
-                stopUsbCamera()
+                // stopUsbCamera()
                 b.overlay.clearPoints()
                 b.overlay.hideSimDot()
                 b.previewView.visibility = View.INVISIBLE
@@ -120,7 +122,7 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
                 b.overlay.clearPoints()
                 when (cameraSource) {
                     CameraSource.INTERNAL -> startCamera()
-                    CameraSource.USB -> startUsbCamera()
+                    // CameraSource.USB -> startUsbCamera()
                     CameraSource.WIFI -> {
                         val url = b.edWifiUrl.text.toString()
                         if (url.isNotEmpty()) {
@@ -196,29 +198,32 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
 
         if (!simulate) ensureCameraPermission { startCamera() }
 
-        usbMonitor = USBMonitor(this, onDeviceConnectListener)
+        // usbMonitor = USBMonitor(this, onDeviceConnectListener)
     }
 
     override fun onResume() {
         super.onResume()
+        /*
         if (cameraSource == CameraSource.USB) {
             usbMonitor?.register()
         }
+        */
     }
 
     override fun onPause() {
         super.onPause()
-        usbMonitor?.unregister()
+        // usbMonitor?.unregister()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         stopCamera()
         stopWifiCamera()
-        stopUsbCamera()
-        usbMonitor?.destroy()
+        // stopUsbCamera()
+        // usbMonitor?.destroy()
     }
 
+    /*
     private val onDeviceConnectListener: USBMonitor.OnDeviceConnectListener = object : USBMonitor.OnDeviceConnectListener {
         override fun onAttach(device: UsbDevice?) {
             if (cameraSource == CameraSource.USB) {
@@ -263,6 +268,7 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
 
         override fun onCancel(device: UsbDevice?) {}
     }
+    */
 
     private fun ensureCameraPermission(onGranted: () -> Unit) {
         val ok = ContextCompat.checkSelfPermission(
@@ -336,6 +342,7 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
         exoPlayer = null
     }
 
+    /*
     private fun startUsbCamera() {
         b.previewView.visibility = View.GONE
         b.textureView.visibility = View.VISIBLE
@@ -348,6 +355,7 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
         uvcCamera?.close()
         uvcCamera = null
     }
+    */
 
     private val simTick = object : Runnable {
         override fun run() {
@@ -369,10 +377,12 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
     override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
         when (cameraSource) {
             CameraSource.WIFI -> exoPlayer?.setVideoSurface(Surface(surface))
+            /*
             CameraSource.USB -> {
                 uvcCamera?.setPreviewDisplay(Surface(surface))
                 uvcCamera?.startPreview()
             }
+            */
             else -> {}
         }
     }
@@ -382,14 +392,14 @@ class MainActivity : ComponentActivity(), TextureView.SurfaceTextureListener {
     override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
         when (cameraSource) {
             CameraSource.WIFI -> exoPlayer?.clearVideoSurface()
-            CameraSource.USB -> uvcCamera?.stopPreview()
+            // CameraSource.USB -> uvcCamera?.stopPreview()
             else -> {}
         }
         return true
     }
 
     override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
-        if ((cameraSource == CameraSource.WIFI || cameraSource == CameraSource.USB) && autoDetect) {
+        if (/* (cameraSource == CameraSource.USB) || */ (cameraSource == CameraSource.WIFI) && autoDetect) {
             val bmp = b.textureView.bitmap ?: return
             val center = BlobDetector.detectDarkDotCenter(bmp, cfg)
             if (center != null) b.overlay.addPoint(center.first, center.second)

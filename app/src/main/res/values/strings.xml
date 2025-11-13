@@ -9,7 +9,7 @@
     <string name="wifi">WiFi</string>
     <string name="wifi_url_hint">rtsp://</string>
     <string name="connect">Connect</string>
-    <string name="params_text_format">minA %d  maxA %d  circ≥%.2f  kStd %.2f  mm/px %s</string>
+    <string name="params_text_format" formatted="false">minA %d  maxA %d  circ≥%.2f  kStd %.2f  mm/px %s</string>
     <string name="unset">unset</string>
     <string name="default_known_mm">10</string>
 </resources>
