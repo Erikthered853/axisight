@@ -54,9 +54,8 @@ dependencies {
     implementation "androidx.camera:camera-view:$camerax_version"
 
 
-    // USB Camera - Temporarily disabled due to dependency issues
-    // TODO: Find working UVC camera library
-    // implementation 'com.github.saki4510t:UVCCamera:v3.1.0'
+    // USB Camera
+    implementation 'com.github.saki4510t:UVCCamera:v3.1.0'
 
 
     // ExoPlayer for WiFi camera streaming
